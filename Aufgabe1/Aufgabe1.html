@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+<!--Aufgabe--> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="WME Aufgabe 1">
+   
+     <!--Fonts-->
+    <link rel="stylesheet" href="ressourcen/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="ressourcen/fonts/Roboto/Roboto-Light.ttf">
+    
+    <!--CSS-Dateien-->
+    <link rel="stylesheet" type="text/css" href="ressourcen/style/css_reset.css">
+    <link rel="stylesheet" type="text/css" href="ressourcen/style/Aufgabe1.css">
+    
+    <!--JS
+    ............-->
+    
+    <title>WME Course Exercise HTML, CSS and JS</title>
+    
+</head>
+<body>
+    <header>
+    <nav id="Menueleiste">
+        <a id="logo" href="" title="Home"></a>
+        <ul id="Menue">
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A1 - Table</li></a>
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A2 - Parse</li></a>
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A2 - Save</li></a>
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A2 - Print</li></a>
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A3 - REST</li></a>
+            <a class="menuelink" href=""><li class="menueelem"><i class="fa fa-list-ul" aria-hidden="true"></i> A4 - Vis</li></a>
+        </ul>
+    </nav>
+    </header>
+    
+    <!--erster Absatz mit Text-->
+    <artikel id="Text">
+            <header>
+                <h1 class="ueberschrift">World Data Overview...</h1>
+            </header>
+            
+            <section class="text">
+                Cat ipsum dolor sit amet, kitty scratches couch bad kitty. Rub face on owner all of a sudden cat goes crazy, and kitty scratches couch bad kitty, unwrap toilet paper, or claw drapes hiss and stare at nothing then run suddenly away spill litter box, scratch at owner, destroy all furniture, especially couch. Cats go for world domination immediately regret falling into bathtub give attitude scratch at fleas, meow until belly rubs, hide behind curtain when vacuum cleaner is on scratch strangers and poo on owners food, curl into a furry donut yet kitty scratches couch bad kitty jump around on couch, meow constantly until given food, . Relentlessly pursues moth meowwww. Leave dead animals as gifts if it fits, i sits for who's the baby pose purrfectly to show my beauty or plop down in the middle where everybody walks and pose purrfectly to show my beauty. Fooled again thinking the dog likes me intently stare at the same spot, or step on your keyboard while you're gaming and then turn in a circle. from: <a>jony_ipsum</a>
+            </section>    
+        
+    </artikel>   
+    <!--zweiter Absatz mit Tabelle/Liste-->
+        
+    <div class="table_container">
+        <div class="tabnav">
+            Show/Hide:
+            <Button title="Tabelle" class="button_nav" onclick="toggle_column('table_col_3')">birth rate</Button>    |
+            <Button title="Tabelle" class="button_nav" onclick="toggle_column('table_col_4')">cellphones</Button>    |
+            <Button title="Tabelle" class="button_nav" onclick="toggle_column('table_col_5')">children / woman</Button>   |
+            <Button title="Tabelle" class="button_nav" onclick="toggle_column('table_col_6')">electric usage</Button>     |
+            <Button title="Tabelle" class="button_nav" onclick="toggle_column('table_col_7')">internet usage</Button>
+        </div>
+        
+        <table class="Tabelle" id="table_1">
+            <colgroup>
+                <col id="table_col_1">
+                <col id="table_col_2">
+                <col id="table_col_3">
+                <col id="table_col_4">
+                <col id="table_col_5">
+                <col id="table_col_6">
+                <col id="table_col_7">
+            </colgroup>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>
+                        Country
+                        <Button class="sortierbutton" onclick="sort('table_1', 1, 1)"><i class="fa fa-angle-up"></i></Button>
+                        <Button class="sortierbutton" onclick="sort('table_1', 1, 0)"><i class="fa fa-angle-down"></i></Button>
+                    </th>
+                    <th>birth rate /1000</th>
+                    <th>cellphones /100</th>
+                    <th>children / woman</th>
+                    <th>electric usage</th>
+                    <th>internet usage</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Brazil</td>
+                    <td>16.405</td>
+                    <td>99.99999998</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                </tr>
+                 <tr>
+                    <td>002</td>
+                    <td>Canada</td>
+                    <td>16.405</td>
+                    <td>99.99999999</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>003</td>
+                    <td>Chile</td>
+                    <td>16.405</td>
+                    <td>91.019363234</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>004</td>
+                    <td>China</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                  <tr>
+                    <td>005</td>
+                    <td>Colombia</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>006</td>
+                    <td>Ecuador</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>007</td>
+                    <td>Egypt</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                  <tr>
+                    <td>008</td>
+                    <td>Finland</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>009</td>
+                    <td>France</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>010</td>
+                    <td>Germany</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>011</td>
+                    <td>Iceland</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>012</td>
+                    <td>Iraq</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>013</td>
+                    <td>Japan</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>014</td>
+                    <td>Kazakhstan</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>015</td>
+                    <td>Mexico</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>016</td>
+                    <td>New Zealand</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>017</td>
+                    <td>Nigeria</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>018</td>
+                    <td>Peru</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>019</td>
+                    <td>Russia</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>020</td>
+                    <td>Saudi Arabia</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>021</td>
+                    <td>South Africa</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>022</td>
+                    <td>Sweden</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>023</td>
+                    <td>United Arab Emirates</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                 <tr>
+                    <td>024</td>
+                    <td>United Kingdom</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                <tr>
+                    <td>025</td>
+                    <td>United States</td>
+                    <td>16.405</td>
+                    <td>92.01936338</td>
+                    <td>1.862</td>
+                    <td>2201.808724</td>
+                    <td>4424.758692</td>
+                 </tr>
+                </tbody>
+         </table>
+    </div>
+    
+</body>
+
+<!--Fußzeile-->
+<footer id="footer">
+    <div class="footer_left">
+        Copyright .. 2015 world_data
+        <br>
+        First course exercise HTML, CSS and JS of the lecture Web and Multimedia Engineering.
+    </div>
+    
+    <div class="footer_right">
+        This solution has been created by:
+        <br>
+        Sophia Urban (s2445505) and Robert Glöckner (s.....)- Team 17
+    </div>
+</footer>
+</html>
