@@ -1,39 +1,5 @@
 
 /*
-Toggles the visibility of a table column.
-@param{col_id} the id of a column.
-
-Collapse does not work in chrome (for this exercise not necessary).
-
-https://code.google.com/p/chromium/issues/detail?id=174167
-*/
-function toggle_column(col_id){
-         var col = document.getElementById(col_id);
-         var vis = col.style.visibility == 'collapse';
-         col.style.visibility = vis? "visible" : "collapse";
-}
-
-
-/*
-adding table rows. only for testing.
-*/
-function add_table_row(table_id){
-         var tbl = document.getElementById(table_id);
-         var tbod = tbl.getElementsByTagName("tbody")[0];
-
-         for(var i = 0; i < 25; i++){
-                 var row = document.createElement('tr');
-                 for(var k = 0; k < 7; k++){
-                         var cell = document.createElement('td');
-                         var cont = document.createTextNode("Test" + k);
-                         cell.appendChild(cont);
-                         row.appendChild(cell);
-                 }
-                 tbod.appendChild(row);
-         }
-}
-
-/*
 Uses shakersort.
 https://de.wikipedia.org/wiki/Shakersort
 
