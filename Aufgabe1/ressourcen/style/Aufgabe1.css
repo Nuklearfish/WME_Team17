@@ -1,4 +1,4 @@
-/*position: sticky;*/ /*Menüleiste bleibt am oberen Rand*/
+
 body{
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -17,18 +17,32 @@ a:hover{
     margin: 0px;
     height: 81px;
     position: fixed;
-    /*position: sticky;*/
+    
     top: 0px;
     width: 100%;
     border-bottom: thin solid lightgray;
     background: linear-gradient(to bottom, lightgrey , white);
 }
-
+/* funktioniert nicht :( */
+/*Schwellenwert Tablets*/
+@media (max-device-width: 768px) { }
+/*Schwellenwert Phones*/
+@media (max-device-width: 320px) { 
+	#Menueleiste {
+    margin: 0px;
+    height: 100%;
+    position:sticky;
+    display: table-column;
+    top: 0px;
+    width: 10%;
+    border-bottom: thin solid lightgray;
+    background: linear-gradient(to bottom, black , white);
+}}
 /*Link Logo*/
 #logo{
     margin-left: 100px;
     margin-right: 50px;
-    background: url(../Logo/world_data_logo_v1.png);
+    background: url(../Logo/world_data_logo.png);
     height: 81px;
     width: 150px;
     float: left;

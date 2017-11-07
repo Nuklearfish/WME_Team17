@@ -1,10 +1,10 @@
 
 /*
-Uses shakersort.
+Nutzt shakersort.
 https://de.wikipedia.org/wiki/Shakersort
 
-@param{table_id} id of the table which should be sorted
-@param{type} 0 for asc, 1 for desc
+@param{table_id} ID der Tab. die sortiertwerden soll
+@param{type} 0 für aufsteigend, 1 für absteigend
 */
 function sort(table_id, col_nbr, type){
          var tbl = document.getElementById(table_id);
@@ -14,11 +14,11 @@ function sort(table_id, col_nbr, type){
 }
 
 /*
-should be a simple impl of shakersort
+eine siple impementation von shakersort
 
-@param{rows} table rows which should be sorted
-@param{col_nbr} column which should be compared
-@param{type} 0 for asc, 1 for desc
+@param{rows} Tabellenspalten die sortiert werden sollen
+@param{col_nbr} Spalte an der sortiert wird
+@param{type} 0 für aufsteigend, 1 für absteigend
 */
 function shakersort(rows, col_nbr, type){
          var end = rows.length - 2;
@@ -28,11 +28,11 @@ function shakersort(rows, col_nbr, type){
                  swapped = false;
                  for(var i = 0; i < end + 1; i++){
                          var cmp = compare_row(rows[i], rows[i + 1], col_nbr);
-                         if(cmp < 0 && type == 0){
+                         if(cmp < 0 && type === 0){
                                  swap(rows[i], rows[i + 1]);
                                  swapped = true;
                          }
-                         if(cmp > 0 && type == 1){
+                         if(cmp > 0 && type === 1){
                                  swap(rows[i], rows[i + 1]);
                                  swapped = true;
                          }
@@ -43,11 +43,11 @@ function shakersort(rows, col_nbr, type){
                  swapped = false;
                  for(var i = end;  i > -1; i--){
                          var cmp = compare_row(rows[i], rows[i + 1], col_nbr);
-                         if(cmp < 0 && type == 0){
+                         if(cmp < 0 && type === 0){
                                 swap(rows[i], rows[i + 1]);
                                 swapped = true;
                          }
-                         if(cmp > 0 && type == 1){
+                         if(cmp > 0 && type === 1){
                                 swap(rows[i], rows[i + 1]);
                                 swapped = true;
                          }
@@ -56,16 +56,16 @@ function shakersort(rows, col_nbr, type){
 }
 
 /*
-Swapping nodes e.g. table rows
+Tauscht tabellenspalten 
 */
 function swap(row1, row2){
          row2.parentNode.insertBefore(row1, row2.nextSibling);
 }
 
 /*
-Compares 2 rows in the given col number.
-Returns -1 if row1 is sorted before row2
-@param{col_nbr} the column which should be compared in the two rows
+Vergleich von zwei spalten
+-1 wenn zeile 1 vor zeile 2 gehört
+@param{col_nbr} die Spalte die verglichen werden soll
 */
 function compare_row(row1, row2, col_nbr){
          var val1 = row1.cells[col_nbr].firstChild.nodeValue;

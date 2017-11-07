@@ -20,15 +20,14 @@
     <link rel="stylesheet" type="text/css" href="ressourcen/style/css_reset.css">
     <link rel="stylesheet" type="text/css" href="ressourcen/style/Aufgabe1.css">
     
-    <!--JS
-    ............-->
+    <!--JS............-->
     <script src="ressourcen/js/Aufgabe1.js"></script>
   	
   <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-  <script>
+  
+   <!--show/hide Script für Tabellenspalten-->
+   <script>
     $(function() {
-
-
     $('#toggle_colum3').click(function() {
         $('th:nth-child(3)').toggle();        
 		$('td:nth-child(3)').toggle();                
@@ -51,14 +50,10 @@
        });
     });
     </script>
-	
-               
-            
-                    
-    
     
 </head>
-<body>
+   
+ <body>
     <header>
     <nav id="Menueleiste">
         <a id="logo" href="" title="Home"></a>
