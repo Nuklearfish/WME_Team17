@@ -9,7 +9,7 @@
          <meta name="description" content="WME Aufgabe 2">
          <meta name="keywords" content="PHP">
          <meta name="author" content="Robert Glöckner">
-         <meta name="author" content="Sophie Urban">
+         <meta name="author" content="Sophia Urban">
 
          <title>Aufgabe 2 - Save</title>
 </head>
@@ -22,9 +22,9 @@
         $save_result = $parser->saveXML($parsed);
 
         if($save_result)
-                echo "<p style=\"color: green\">Writing XML file was succesful</p>";
+                echo "<p style=\"color: green\">XML Savestatus: erfolgreich (1)</p>";
         else
-                echo "<p style=\"color: red\">Error while writing XML file</p>";
+                echo "<p style=\"color: red\">XML Savestatus: nicht erfolgreich (0)</p>";
 ?>
 
 
