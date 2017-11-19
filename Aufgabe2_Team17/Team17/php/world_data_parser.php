@@ -28,7 +28,24 @@ class WorldDataParser{
 		$xml = $this->formatXML($raw_xml->asXML());		
 		return file_put_contents("world_data_v1.xml", $xml) == FALSE ? FALSE : TRUE;
 	}
-	
+    
+	//XML in HTML eingefügt
+    function printXML($xml_path, $xsl_path){
+		$xml = new DOMDocument();
+		$xml->load($xml_path);
+        
+        $xslt = new XSLTProcessor;
+		
+		$xsl = new DOMDocument();
+		$xsl->load($xsl_path);
+		$xslt->importStylesheet($xsl);
+		
+		$doc = $xslt->transformToDOC($xml);
+		$doc->formatOutput = true;
+		return $doc->saveHTML();
+	} 
+
+    //XML Datei bearbeiten
     function createRawXML($data){
         $root = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><Countries></Countries>');
 		
@@ -66,5 +83,4 @@ class WorldDataParser{
 		$tmp = rtrim($tmp, " ");
 		return $tmp;			
 	}
-    
 }

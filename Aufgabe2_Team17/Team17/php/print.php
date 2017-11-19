@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 
 <html>
-
-
+<?php
+        include("world_data_parser.php");
+?>
 <head>
     <title>WME Course Exercise XML and PHP</title>
     <meta charset="UTF-8">
@@ -13,13 +14,44 @@
     <meta name="keywords" content="WME, World Data, Assingment" />    
     
      <!--Fonts-->
-    <link rel="stylesheet" href="ressourcen/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Team17/ressourcen/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/Team17/ressourcen/fonts/Roboto/Roboto-Light.ttf">
     
     <!--CSS-Dateien-->
     <link rel="stylesheet" type="text/css" href="/Team17/ressourcen/style/css_reset.css">
     <link rel="stylesheet" type="text/css" href="/Team17/ressourcen/style/Aufgabe1.css">
+    
+        <!--JS............-->
+    <script src="ressourcen/js/Aufgabe1.js"></script>
+  	
+  <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+  
+   <!--show/hide Script für Tabellenspalten-->
+   <script>
+    $(function() {
+    $('#toggle_colum3').click(function() {
+        $('th:nth-child(3)').toggle();        
+		$('td:nth-child(3)').toggle();                
+       });
+    $('#toggle_colum4').click(function() {
+        $('th:nth-child(4)').toggle();        
+		$('td:nth-child(4)').toggle();                
+       });
+    $('#toggle_colum5').click(function() {
+        $('th:nth-child(5)').toggle();        
+		$('td:nth-child(5)').toggle();                
+       });
+    $('#toggle_colum6').click(function() {
+        $('th:nth-child(6)').toggle();        
+		$('td:nth-child(6)').toggle();                
+       });
+    $('#toggle_colum7').click(function() {
+        $('th:nth-child(7)').toggle();        
+		$('td:nth-child(7)').toggle();                
+       });
+    });
+    </script>
     
     <title>Aufgabe 2 - Parse</title>
     
@@ -56,11 +88,16 @@
         </div>
         
      <?php
-        $parser = new WorldDataParser();
-        $parsedCSV = $parser->parseCSV("world_data_v1.csv");
+        //Inserts Data Table
 
-        echo print_r($parsedCSV);
-     ?>
+        $parser = new WorldDataParser();
+        $parsed = $parser->parseCSV("world_data_v1.csv");
+        $save_result = $parser->saveXML($parsed);
+        $print = $parser->printXML("world_data_v1.xml", "world_data_v1.xsl");
+
+        echo $print;
+
+    ?>
         
    </div>
 
