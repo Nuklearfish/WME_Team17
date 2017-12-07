@@ -47,10 +47,76 @@ converter.on("end_parsed", function (jsonArray) {
 });
 
 require("fs").createReadStream("public/world_data.csv").pipe(converter);
+
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 
+
+
+
+/**************************************************************************
+********************** Private METHODS ************************************
+**************************************************************************/
+
+//gets a item by a id
+function getItemById(id){
+	for(var i = 0; i < jsonTable.length; i++){		
+		if(jsonTable[i]["id"] == id){
+			return jsonTable[i];
+		}
+	}
+		return null;
+}
+
+//gets the range list
+function getRangeList(start, end){
+	var tmp = new Array();
+	for(var i = 0; i < jsonTable.length; i++){
+		var tmpId = jsonTable[i]["id"];
+		if(tmpId >= start && tmpId <= end)
+			tmp.push(jsonTable[i]);
+	}
+	return tmp;	
+}
+
+function removeTrailingZero(value){
+	var val = value.replace(/^[0]+/g, '');
+	//console.log("Convert from '" + value + "' to '" + val + "'");
+	if(val == "")
+		return 0;
+	return parseInt(val);
+}
+
+function createItem(vId, vName, vBirth, vCell){
+	return {id:	vId,
+	name: vName,
+	birth_rate_per_1000: vBirth,
+	cell_phones_per_100: vCell,
+	children_per_woman: "",
+	electricity_consumption_per_capita: "",
+	gdp_per_capita: "",
+	gdp_per_capita_growth: "",
+	inflation_annual: "",
+	internet_user_per_100: "",
+	life_expectancy: "",
+	military_expenditure_percent_of_gdp: "", 
+	gps_lat: "",
+	gps_long: ""};
+}
+
+//Deletes an item with the given id. returns the item wich was deleted, 
+//otherwise null if no element with the given id exists.
+function deleteItemWithId(id){
+	for(var i = 0; i < jsonTable.length; i++){
+		if(id == jsonTable[i]["id"]){
+			var val = jsonTable[i];
+			jsonTable.splice(i, 1);
+			return val;
+		}
+	}
+	return null;	
+}
 
 // DO NOT CHANGE!
 // bind server to port
