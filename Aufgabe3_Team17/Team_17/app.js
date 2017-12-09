@@ -31,6 +31,9 @@ var converter = new Converter({
 //reads the csv and set the properties and the last id
 converter.on("end_parsed", function (jsonArray) {
 	jsonTable = jsonArray;
+    //Datei erstellen
+    require("fs").writeFile('jsonTable.json', JSON.stringify(jsonTable), 'utf8');
+    
 	properties = new Array();
 	
 	if(jsonTable.length == 0 )
@@ -45,7 +48,7 @@ converter.on("end_parsed", function (jsonArray) {
 		
 	lastId = parseInt(jsonTable[jsonTable.length - 1].id);
 });
-
+//open and read CSV
 require("fs").createReadStream("public/world_data.csv").pipe(converter);
 
 /**************************************************************************
