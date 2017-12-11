@@ -31,8 +31,8 @@ var converter = new Converter({
 //reads the csv and set the properties and the last id
 converter.on("end_parsed", function (jsonArray) {
 	jsonTable = jsonArray;
-    //Datei erstellen
-    require("fs").writeFile('jsonTable.json', JSON.stringify(jsonTable), 'utf8');
+    //create Data
+    require("fs").writeFile('jsonTable.json', JSON.stringify(jsonTable), (error) => { /* handle error */ });
     
 	properties = new Array();
 	
@@ -50,11 +50,110 @@ converter.on("end_parsed", function (jsonArray) {
 });
 //open and read CSV
 require("fs").createReadStream("public/world_data.csv").pipe(converter);
-
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 
+// GET /items
+app.get('/items', function (req, res) {
+  res.send(jsonTable);
+});
+
+// GET /items/id
+app.get('/items/:id([0-9]+)', function (req, res) {
+	var id = req.params.id;
+	var response = getItemById(id);
+	console.log("item with id '%s' : ", id, response);
+	
+	if(response == null)
+		res.status(404).send("no such id {" + id + "} in database");
+	else
+		res.send(response);
+});
+
+// GET /items/id/id
+app.get('/items/:start([0-9]+)/:end([0-9]+)', function (req, res) {
+	var start = req.params.start;
+	var end = req.params.end;
+	var response;
+	
+	if(start == end)
+		response = getItemById(start);		
+	else if(start > end)
+		response = getRangeList(end, start);
+	else
+		response = getRangeList(start, end);
+	
+	if(response == null || response.length == 0)
+		res.status(404).send("Range not possible.");
+	else
+		res.send(response);
+});
+
+// GET /properties
+app.get('/properties', function (req, res) {
+  res.send(properties);
+});
+
+// GET /properties/num
+app.get('/properties/:int(\\d+)', function (req, res) {
+	var id = parseInt(req.params.int);
+	if(id >= properties.length)
+		res.status(404).send("No such property with id '" + id + "' found");
+	else
+		res.send(properties[id]);
+	//console.log("Prop with id '%d' : '%s' ", id, response);
+});
+
+// POST /items
+app.post('/items', function (req, res) {
+	console.log("post data: " + req.body);
+	
+	var name = req.body.country_name;
+	var birth = req.body.country_birth;
+	var cell = req.body.country_cellphone;
+	
+	if(name == null || birth == null || cell == null){
+		res.status(404).send("One or more arguments missing.");
+		return;
+	}	
+	console.log("last id: " + lastId);
+	lastId++;
+	//all in same format - thats why the id as string
+	var newItem = createItem(lastId.toString(), name, birth, cell);
+	jsonTable.push(newItem);		
+	console.log("Added country { " + name + " } to list !");
+	res.send("Added country { " + name + " } to list !");
+});
+
+// DELETE /items
+app.delete('/items', function (req, res) {
+	var lastIndex = jsonTable.length - 1;
+	if(lastIndex >= 0){
+		var item = jsonTable[lastIndex];
+		jsonTable.splice(lastIndex, 1);
+		console.log("Deleted last country:{" + item["name"] + "} !");
+		res.send("Deleted last country:{" + item["name"] + "} !");
+	}
+	else{
+		console.log("no items in database");
+		res.status(404).send("no items in database");
+	}
+});
+
+// DELETE /items/id
+app.delete('/items/:id([0-9]+)', function (req, res) {
+	var id = req.params.id;
+	var item = deleteItemWithId(id);
+	if(item != null){
+		console.log("Deleted country:{" + item["name"] + "} !");
+		res.send("Deleted country:{" + item["name"] + "} !");
+	}
+	else{
+		console.log("no such id {" + id + "} in database");
+		res.status(404).send("no such id {" + id + "} in database");
+	}
+});
 
 
 
