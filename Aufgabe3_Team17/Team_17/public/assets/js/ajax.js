@@ -1,6 +1,6 @@
 var visibleColumnNr = [];
 
-//document loaded
+//Dokument geladen
 $(document).ready(initialize());
 
 /********************************************************************************
@@ -16,7 +16,7 @@ $( "#hide_selected_prop" ).click(function() {
 	showHideTableColumn(cur, true);	
 });
 
-//gets the column number from the current selected index in the selection section
+//gibt ausgewählte Spalte zurück
 function getColumnNumber(){
 	var sel = document.getElementById("prop_selection");
 	var cur = sel.options[sel.selectedIndex].value;
@@ -27,13 +27,13 @@ function getColumnNumber(){
 ********************************* FORMS *****************************************
 *********************************************************************************/
 
-//Submit filter form
+//Filter anwenden
 $("#country_filter").submit(function(event) {
     event.preventDefault();
 	filter();
 });
 
-//Delete form
+//Eintrag Löschen
 $("#country_delete").submit(function(event) {
     event.preventDefault();
 	var id = document.getElementById("country_delete_id").value;
@@ -47,7 +47,7 @@ $("#country_delete").submit(function(event) {
 		deleteItemWithId(id);	
 });
 
-// Post new entry form
+//Neuen Eintrag erstellen
 $("#country_add").submit(function(event) {
     event.preventDefault();	
 	var name = document.getElementById("country_name").value;
@@ -60,7 +60,7 @@ $("#country_add").submit(function(event) {
 ********************************* REQUESTS ***************************************
 *********************************************************************************/
 
-//the actual async post
+//Ajax POST
 function postNewItem(name, birth, cell){
 		$.ajax("http://localhost:3000/items", {
 		data: '{ "country_name": "' + name + '", "country_birth": "' + birth + '", "country_cellphone": "' + cell + '"}',
@@ -71,7 +71,7 @@ function postNewItem(name, birth, cell){
    });	
 }
 
-//deletes item with the given id
+//Löschen mit ID
 function deleteItemWithId(id){
 	$.ajax("http://localhost:3000/items/" + id, {
 		method: "DELETE",
@@ -80,7 +80,7 @@ function deleteItemWithId(id){
    });		
 }
 
-//deletes last item stored in server db
+//Löschen ohne ID
 function deleteLastItem(){
 	$.ajax("http://localhost:3000/items", {
 		method: "DELETE",
@@ -89,7 +89,7 @@ function deleteLastItem(){
    });		
 }
 
-// receive properties
+//Eigenschaften anfordern
 function receiveProps(){
 	$.ajax("http://localhost:3000/properties", {
       success: fillProps,
@@ -97,7 +97,7 @@ function receiveProps(){
    });	
 }
 
-// receive the full table
+//Ganze Tabelle anfordern
 function receiveTable(){
 	$.ajax("http://localhost:3000/items", {
       success: fillTable,
@@ -105,7 +105,7 @@ function receiveTable(){
    });
 }
 
-// sends request for filtered table
+//Tabellenfilter Anfrage mit mehreren IDs
 function filterRange(start, end){
 	$.ajax("http://localhost:3000/items/" + start + "/" + end, {
       success: fillTable,
@@ -113,7 +113,7 @@ function filterRange(start, end){
    });	
 }
 
-// sends request for filtered table
+//Tabellenfilter Anfrage mit ID
 function filterSingle(id){
 	$.ajax("http://localhost:3000/items/" + id, {
       success: fillSingle,
@@ -126,7 +126,7 @@ function filterSingle(id){
 ********************************* PRIVATE METHODS ********************************
 *********************************************************************************/
 
-//shows the status message for 5 seconds
+//Fehlermeldung anzeigen
 function showStatusMessage(message, isError){
 	var container = document.getElementById("status_box");
 	var st = document.getElementById("status_text");
@@ -142,7 +142,7 @@ function showStatusMessage(message, isError){
 	setTimeout(function(){container.style.visibility = 'hidden'}, 5000);
 }
 
-//filters - receives all values if no filter is set
+//Filter (gibt ganze Tabelle Zurück, wenn keine ID angegeben)
 function filter(){
 	var id = document.getElementById("country_filter_id").value;
 	var range = document.getElementById("country_filter_range").value;
@@ -161,14 +161,14 @@ function filter(){
 	hideTableCols();
 }
 
-//Refreshs the table and shows status message for requests which are successful
+//Tablellenwerte  neu laden und Status anzeigen
 function refresh(data){
 	showStatusMessage(data, false);
 	filter();
 }
 
-//tries to get the given range.
-//returns false if range field is empty or in wrong format
+//Testet den angegebenen Intervall
+//gibt false wenn die Variable leer oder falsch formatiert ist
 function tryRange(range){
 	var rangeSplit;
 	if(range == null)
@@ -187,7 +187,7 @@ function initialize(){
 	receiveTable();
 }
 
-// fills table with single value
+//Um einzelne Spalte anzuzeigen
 function fillSingle(data){
 	var tBody = document.getElementById("table_body");
 	removeAllChilds(tBody);	
@@ -202,7 +202,7 @@ function fillSingle(data){
 	hideTableCols();
 }
 
-// fills the property section and the table header
+//Tabellenkopf und Eigenschaftenauswahl füllen
 function fillProps(data){
 	var selection = document.getElementById("prop_selection");
 	var thead = document.getElementById("table_head");
@@ -210,12 +210,12 @@ function fillProps(data){
 	removeAllChilds(thead);
 	
 	for(i = 0; i < data.length; i++){
-		//table head
+		//Tabellenkopf
 		var th = document.createElement("th");
 		th.innerHTML = data[i];
 		thead.appendChild(th);
 		
-		//selection
+		//Eigenschaften
 		var opt = document.createElement("option");		
 		opt.value = i;		
 		var txt = document.createTextNode(data[i]);
@@ -226,7 +226,7 @@ function fillProps(data){
 	hideTableColsInit(data.length);
 }
 
-//hides not used table cols and inits the visibility array
+//Nicht genutzte Spalten ausblenden
 function hideTableColsInit(propCount){
 	for(var i = 0; i < propCount; i++)
 		visibleColumnNr.push(true);
@@ -241,13 +241,13 @@ function hideTableColsInit(propCount){
 	}	
 }
 
-//hides the table cols specific to their settings in 'visibleColumnNr'
+//Spalten nach 'visibleColumnNr' ausblenden
 function hideTableCols(){
 	for(var i = 0; i < visibleColumnNr.length; i++)
 		showHideTableColumn(i + 1, !visibleColumnNr[i]);
 }
 
-//hide a table column
+//Spalte aus/einblenden
 function showHideTableColumn(columnNr, hide){
 	if(hide){
 		$('#table_head th:nth-child(' + columnNr + ')').hide();
@@ -260,13 +260,13 @@ function showHideTableColumn(columnNr, hide){
 	visibleColumnNr[columnNr -1] = !hide;	
 }
 
-//removes all childs from the parent
+
 function removeAllChilds(root){
 	while (root.firstChild)
 		root.removeChild(root.firstChild);	
 }
 
-//fills the table with the given data (array)
+//Füllt tabelle mit angegebenem (array)
 function fillTable(data){
 	var tBody = document.getElementById("table_body");
 	removeAllChilds(tBody);
@@ -283,7 +283,7 @@ function fillTable(data){
 	hideTableCols();
 }
 
-//handles error responses
+//Fehlermeldung
 function handleResponseError(jqXHR, textStatus, errorThrown){
 	console.log("Error: " + errorThrown + ": " + jqXHR.responseText);	
 	showStatusMessage(errorThrown + ": " + jqXHR.responseText, true);
