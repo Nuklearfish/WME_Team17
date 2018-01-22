@@ -136,7 +136,7 @@ nav a#pull {
 }
 
 /* Bar Chart and Map */
-bCandMap{
+.bCandMap{
     width: 1170px; 
     height: 600px
 }
