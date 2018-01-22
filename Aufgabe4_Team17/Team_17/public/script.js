@@ -64,8 +64,8 @@ window.onscroll = stick;
 let formatValue = d3.format(",.0f");
 
 let margin = {top: 20, right: 25, bottom: 110, left: 45},
-    width = 500 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 200 - margin.top - margin.bottom;
 
 let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
     y = d3.scaleLinear().rangeRound([height, 0]);
