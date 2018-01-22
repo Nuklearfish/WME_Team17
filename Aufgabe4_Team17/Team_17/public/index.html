@@ -20,11 +20,10 @@
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
     <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/E4D923A3-D1F8-524F-BFAE-C45665D9C293/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/392C9D56654C-EAFB-F425-8F1D-3A329D4E/abn/main.css"/>
 <script src="https://d3js.org/d3.v4.min.js"></script> 
-
+    
 </head>
 
 <body>
-
 <header id="sticky_header">
 	<nav class="container clearfix" role="navigation">
 		<a class="logo" href="/">world_data</a>
@@ -51,37 +50,65 @@
 		<a href="#" id="pull"><i class="fa fa-list-ul"></i></a>
 	</nav>
 </header>
+    
+    
 <script type="text/javascript" src="world_data.json"></script>
  
-<!--******************container mit BarChart und Map********************-->    
+<!--******************container with BarChart and Map********************-->    
  <div class="container"> 
      
-     <div class="barChart">
-   
-    <!--******************BarChart from D3js.org*******************************-->
-    <!--Selector for svg-->
-    <select id="category"class="select1">
-        <option value="gps long">gps_long</option>
-        <option value="gps lat">gps_lat</option>
-        <option value="military expenditure percent of gdp">military_expenditure_percent_of_gdp</option>
-		<option value="life expectancy">life_expectancy</option>
-        <option value="internet user per 100">internet_user_per_100</option>
-        <option value="inflation annual">inflation_annual</option>
-        <option value="gdp per capita growth">gdp_per_capita_growth</option>
-        <option value="gdp per capita">gdp_per_capita</option>
-        <option value="electricity consumption per capita">electricity_consumption_per_capita</option>
-        <option value="children per woman">children_per_woman</option>
-        <option value="cell phones per 100">cell_phones_per_100</option>
-        <option value="birth rate per 1000">birth_rate_per_1000</option>
-        <option value="name">name</option>
-        <option value="id">id</option>
-    </select>
-    <br>
+     <div class="barChart" style="margin-top: 120px">
+   <div id="chart">
+        <!--Selector for svg-->
+        <select id="category">
+            <option value="gps long" onclick="barChartOne()">gps_long</option>
+            <option value="gps lat">gps_lat</option>
+            <option value="military expenditure percent of gdp">military_expenditure_percent_of_gdp</option>
+            <option value="life expectancy">life_expectancy</option>
+            <option value="internet user per 100">internet_user_per_100</option>
+            <option value="inflation annual">inflation_annual</option>
+            <option value="gdp per capita growth">gdp_per_capita_growth</option>
+            <option value="gdp per capita">gdp_per_capita</option>
+            <option value="electricity consumption per capita">electricity_consumption_per_capita</option>
+            <option value="children per woman">children_per_woman</option>
+            <option value="cell phones per 100">cell_phones_per_100</option>
+            <option value="birth rate per 1000" selected>birth_rate_per_1000</option>
+            <option value="name">name</option>
+            <option value="id">id</option>
+        </select>
+        <br>
     
-<!-- Chart -->
-<div id="chart"></div>
-<script src="script.js"></script>   
-</div>
+         <!-- Chart -->
+         </div>
+         
+     </div>
+     
+     <div class="barChart" style="width: 500px; height: 250px">
+         <div id="chart1">
+        <!--Selector for svg-->
+         <select id="category1">
+            <option value="gps long">gps_long</option>
+            <option value="gps lat">gps_lat</option>
+            <option value="military expenditure percent of gdp">military_expenditure_percent_of_gdp</option>
+            <option value="life expectancy">life_expectancy</option>
+            <option value="internet user per 100">internet_user_per_100</option>
+            <option value="inflation annual">inflation_annual</option>
+            <option value="gdp per capita growth">gdp_per_capita_growth</option>
+            <option value="gdp per capita" selected>gdp_per_capita</option>
+            <option value="electricity consumption per capita">electricity_consumption_per_capita</option>
+            <option value="children per woman">children_per_woman</option>
+            <option value="cell phones per 100">cell_phones_per_100</option>
+            <option value="birth rate per 1000">birth_rate_per_1000</option>
+            <option value="name">name</option>
+            <option value="id">id</option>
+        </select>
+        <br>
+         
+        <!-- Chart -->
+    </div>
+
+     </div>
+
 
 <!--**********************Map with Icons**********************-->
 	<div id="mapid" class="map"></div>

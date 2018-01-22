@@ -63,8 +63,8 @@ window.onscroll = stick;
 
 let formatValue = d3.format(",.0f");
 
-let margin = {top: 35, right: 145, bottom: 110, left: 45},
-    width = 700 - margin.left - margin.right,
+let margin = {top: 20, right: 25, bottom: 110, left: 45},
+    width = 500 - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 
 let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
@@ -174,48 +174,45 @@ function ready(error, data) {
 
 } // End of ready
 
-
-/*************second Bar Chart***************/
-/*
-let svg = d3.select("#chart2").append("svg")
+/************second Bar chart*************/
+let svg = d3.select("#chart1").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 	
-	
-g.append("svg")
+svg.append("g")
     .attr("class", "axis axis--x")
     .attr("transform", "translate(0," + height + ")");
 
-g.append("svg")
+svg.append("g")
     .attr("class", "axis axis--y");
         
 
 d3.queue()
     .defer(d3.csv, "world_data.csv", type)
-    .await(ready2);
+    .await(ready1);
 
-function ready2(error, data) {
+function ready1(error, data) {
 
   if (error) throw error;
   
-  var data, INT;
+  var data, INT1;
 
   
   // Event handlers
-  d3.select("#category").on('change', update);
+  d3.select("#category1").on('change', update1);
      
-  update();
+  update1();
    
   
-  function update() {
+  function update1() {
     
-    INT2 = d3.select('#category').property('value');
+    INT1 = d3.select('#category1').property('value');
   
     // Update domain
     y.domain([0, d3.max(data, function(d) {
-    		return +d[INT2]; })
+    		return +d[INT1]; })
     ]).nice();
     
     // Update y axis
@@ -237,31 +234,31 @@ function ready2(error, data) {
       .attr("transform", "rotate(-90)");
     	
     // Update rectangles
-    let bars2 = svg.selectAll(".barEnter")
+    let bars1 = svg.selectAll(".barEnter")
       .data(data, function(d){
         return d.name;
       });
       
-    bars2 = bars2
+    bars1 = bars1
       .enter()
       .append("rect")
       .attr("class", "barEnter") // Enter data reference
       .attr("width", x.bandwidth())
-      .merge(bars);
+      .merge(bars1);
     
-    bars2.transition()
+    bars1.transition()
     	.duration(durations)
     	.attr("height", function(d) { 
-    		return height - y(d[INT2]); 
+    		return height - y(d[INT1]); 
     		})
     	.attr("x", function(d) { 
       	return x(d.name); 
       })
     	.attr("y", function(d) { 
-    		return y(d[INT2]); 
+    		return y(d[INT1]); 
     		});
     
-    bars2.exit().remove();
+    bars1.exit().remove();
     
 
   } // End of update
@@ -269,7 +266,7 @@ function ready2(error, data) {
   afterLoad()
 
 } // End of ready
-*/
+
 /********************************************************
  ********************* Leaflet **************************
  ********************************************************/
