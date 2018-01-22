@@ -263,14 +263,30 @@ function ready1(error, data) {
 
   } // End of update
 
-  afterLoad()
+  afterLoad();
 
 } // End of ready
 
 /********************************************************
  ********************* Leaflet **************************
  ********************************************************/
-
+/*
+var gpslat = new Array();
+var gpslong = new Array();
+var id = new Array();
+var cname = new Array();
+*/
+/*b
+$(document).ready(function () {
+	$.getJSON('world_data.json', function (data) {
+		lat = data.gps_lat;
+		long = data.gps_long;
+		id = data.id;
+		name = data.name;
+			console.log(data[0].name);
+	});
+});
+*/
 /*function load() {
 	alert("g");
 	var myData;
@@ -280,8 +296,19 @@ function ready1(error, data) {
 }*/
 
 	//var world_data = JSON.parse(world_data);
-	var worldmap = L.map('mapid').fitWorld();
+	
 
+	
+	var worldmap = L.map('mapid').fitWorld();
+	
+	/*
+	function createMakers(){
+		for(i=0; i <= gpslat.length-1;i++;){
+	L.marker([gpslat[i], gpslong[i]]).addTo(worldmap)
+		.bindPopup(name[i]);
+		}
+	}
+	*/
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
