@@ -21,7 +21,7 @@ window.onresize = function(event) {
   } else if ( viewport_width < 815) {
     main_nav.style.display = "none";
   }
-}
+};
 
 /********************************************************
  ********************* Sticky Header ********************
@@ -46,14 +46,31 @@ window.onscroll = stick;
  ********************* AJAX *****************************
  ********************************************************/
 // load content on page load
-$(document).ready(function() {
+	$(document).ready(function () {
+		var data;
+		$.ajax({
+			dataType: "json",
+			url: 'world_data.json',
+			data: data,
+			async: false,
+			success: function (data) {
+				// begin accessing JSON data here
+		//		L.marker([data[3].gps_lat,[data[3].gps_long]).addTo(worldmap)
+		//		.bindPopup("Brazil");
+				
+				alert(data[3].id);
+				return data;
+			}
+		});
+	});
+/*$(document).ready(function() {
   //alert("Your script!");
 	function setup() {
 
-  loadJSON("world_data.json", world_data);
+  
 	alert("gg");	
 }
-});
+});*/
 
 /********************************************************
  ********************* D3js vis *************************
@@ -68,13 +85,13 @@ $(document).ready(function() {
 /*function load() {
 	alert("g");
 	var myData;
-	loadJSON("world_data.json", myData);
+	
 	alert(myData[1].name);
 	alert(myData[1].id);
 }*/
 
-	//var world_data = JSON.parse(world_data);
-	var worldmap = L.map('mapid').fitWorld();
+//alert(data[6].id);
+var worldmap = L.map('mapid').fitWorld();
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
@@ -84,6 +101,8 @@ $(document).ready(function() {
 		id: 'mapbox.streets'
 	}).addTo(worldmap);
 	
+
+
 
 	L.marker([-23.5, -46.6]).addTo(worldmap)
 		.bindPopup("Brazil");
