@@ -136,6 +136,10 @@ nav a#pull {
 }
 
 /* Bar Chart and Map */
+bCandMap{
+    width: 1170px; 
+    height: 600px
+}
 select {
 	border: 1px solid #ccc;
 	padding: 3px;
@@ -174,6 +178,7 @@ footer > .container {
 }
 
 footer > .container > div {
+    margin-bottom: 30px;
   float: left;
   width: 48%;
 }
