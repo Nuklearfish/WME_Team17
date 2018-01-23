@@ -45,15 +45,45 @@ window.onscroll = stick;
 /********************************************************
  ********************* AJAX *****************************
  ********************************************************/
-// load content on page load
-/*$(document).ready(function() {
-  //alert("Your script!");
-	function setup() {
+$(document).ready(function () {
+		var data;
+		$.ajax({
+			dataType: "json",
+			url: 'world_data.json',
+			data: data,
+			async : false,
+			success: function (data) {
 
-  loadJSON("world_data.json", world_data);
-	alert("gg");	
-}
-});*/
+	
+	var worldmap = L.map('mapid').fitWorld();
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		id: 'mapbox.streets'
+	}).addTo(worldmap);
+	
+	for (i = 0; i < 25; i++) { 
+    	var gps_lat = data[i].gps_lat;
+		var gps_long = data[i].gps_long;
+		var cname = data[i].name;
+		var gdp_p_c = data[i].gdp_per_capita;
+		var cid = data[i].id;
+		maker = L.marker([gps_lat, gps_long]).addTo(worldmap)
+		.bindPopup("" + cname + "</b><br /> GDP_per_Capita:" + gdp_p_c + "</b><br /> ID:" + cid);
+		
+	}		
+	//L.marker([-23.5, -46.6]).addTo(worldmap)
+	//	.bindPopup("Brazil");
+	//	L.marker([51.5, -0.09]).addTo(worldmap)
+	//	.bindPopup("<b>Hello world!</b><br />I am a popup.");			
+			
+			
+			
+			}
+		});
+	});
 
 /********************************************************
  ********************* D3js vis *************************
@@ -270,60 +300,9 @@ function ready1(error, data) {
 /********************************************************
  ********************* Leaflet **************************
  ********************************************************/
-/*
-var gpslat = new Array();
-var gpslong = new Array();
-var id = new Array();
-var cname = new Array();
-*/
-/*b
-$(document).ready(function () {
-	$.getJSON('world_data.json', function (data) {
-		lat = data.gps_lat;
-		long = data.gps_long;
-		id = data.id;
-		name = data.name;
-			console.log(data[0].name);
-	});
-});
-*/
-/*function load() {
-	alert("g");
-	var myData;
-	loadJSON("world_data.json", myData);
-	alert(myData[1].name);
-	alert(myData[1].id);
-}*/
 
-	//var world_data = JSON.parse(world_data);
-	
 
-	
-	var worldmap = L.map('mapid').fitWorld();
-	
-	/*
-	function createMakers(){
-		for(i=0; i <= gpslat.length-1;i++;){
-	L.marker([gpslat[i], gpslong[i]]).addTo(worldmap)
-		.bindPopup(name[i]);
-		}
-	}
-	*/
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'mapbox.streets'
-	}).addTo(worldmap);
-	
 
-	L.marker([-23.5, -46.6]).addTo(worldmap)
-		.bindPopup("Brazil");
-	
-	
-	L.marker([51.5, -0.09]).addTo(worldmap)
-		.bindPopup("<b>Hello world!</b><br />I am a popup.");
 
 	
 
